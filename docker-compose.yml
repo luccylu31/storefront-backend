@@ -5,6 +5,10 @@ services:
     image: postgres
     ports:
       - '5432:5432'
+    environment:
+      POSTGRES_USER: shopping_user
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: shopping
     env_file:
       - .env
     volumes:

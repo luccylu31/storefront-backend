@@ -1,15 +1,27 @@
-import express, { Request, Response } from 'express'
-import bodyParser from 'body-parser'
+// src/server.ts
+import express, { Request, Response } from 'express';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import productRoutes from './handlers/products';
+import userRoutes from './handlers/users';
+import orderRoutes from './handlers/orders';
 
-const app: express.Application = express()
-const address: string = "0.0.0.0:3000"
+const app: express.Application = express();
+const port = 3003;
 
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+app.use(cors());
 
-app.get('/', function (req: Request, res: Response) {
-    res.send('Hello World!')
-})
+app.get('/', (req: Request, res: Response) => {
+  res.send('Hello, world!');
+});
 
-app.listen(3000, function () {
-    console.log(`starting app on: ${address}`)
-})
+productRoutes(app);
+userRoutes(app);
+orderRoutes(app);
+
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
+});
+
+export default app;

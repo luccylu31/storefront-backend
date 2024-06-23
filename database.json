@@ -1,0 +1,11 @@
+{
+    "dev": {
+      "driver": "pg",
+      "user": "shopping_user",
+      "password": "password123",
+      "host": "localhost",
+      "database": "shopping",
+      "port": 5432
+    }
+  }
+  
