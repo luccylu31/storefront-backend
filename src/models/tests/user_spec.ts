@@ -1,17 +1,14 @@
 import { UserStore, User } from '../user';
 import bcrypt from 'bcrypt';
 
-// Create an instance of the UserStore
 const store = new UserStore();
 
 describe('User Model', () => {
   let testUser: User;
 
   beforeAll(async () => {
-    // Clean up users table before running tests
     await store.clear();
 
-    // Create a test user
     testUser = await store.create({
       first_name: 'Test',
       last_name: 'User',
@@ -21,7 +18,6 @@ describe('User Model', () => {
   });
 
   afterAll(async () => {
-    // Clean up users table after running tests
     //await store.clear();
   });
 

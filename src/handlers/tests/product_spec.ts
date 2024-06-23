@@ -1,7 +1,7 @@
 import request from 'supertest';
-import app from '../../server'; // Import your Express app instance
-import { ProductStore } from '../../models/product'; // Import your ProductStore class
-import { Product } from '../../models/product'; // Import the Product type
+import app from '../../server'; 
+import { ProductStore } from '../../models/product';
+import { Product } from '../../models/product';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
@@ -14,7 +14,6 @@ describe('Product Handler', () => {
   let productId: number;
 
   beforeAll(async () => {
-    // Generate a JWT token for testing purposes
     token = jwt.sign({ user_id: 1 }, process.env.TOKEN_SECRET as string);
   });
 
@@ -36,7 +35,6 @@ describe('Product Handler', () => {
     expect(res.body.price).toBe(newProduct.price);
     expect(res.body.category).toBe(newProduct.category);
 
-    // Save the product ID for use in later tests
     productId = res.body.id;
   });
 
@@ -73,7 +71,6 @@ describe('Product Handler', () => {
   });
 
   afterAll(async () => {
-    // Clean up after all tests
     // await store.clear();
   });
 });

@@ -1,4 +1,3 @@
-// src/models/order.ts
 // @ts-ignore
 import client from '../database';
 

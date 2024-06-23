@@ -6,7 +6,6 @@ import { Product } from '../product';
 const store = new ProductStore();
 const user = new UserStore();
 
-// Mock product data for testing
 const mockProduct: Product = {
   name: 'Test Product',
   price: 19.99,
@@ -17,10 +16,10 @@ describe('Product Model', () => {
   let product: Product;
 
   beforeAll(async () => {
-    await store.clear(); // Clean up any existing data
+    await store.clear(); 
 
     try {
-      await store.create(mockProduct); // Insert mock product
+      await store.create(mockProduct); 
     } catch (error) {
       fail(`Failed to insert mock product: ${error}`);
     }
@@ -131,7 +130,6 @@ describe('Product Model', () => {
   });
 
   afterAll(async () => {
-    // Clean up
-    //await store.clear();
+
   });
 });

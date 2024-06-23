@@ -33,11 +33,9 @@ describe('Order Model', () => {
 
   it('addProduct method should add a product to an order', async () => {
     try {
-      // Get a random order_id and product_id
       const randomOrderId = await store.getRandomOrderId();
       const randomProduct = await product.getRandomProductId();
 
-      // Check if randomOrderId and randomProduct are valid
       if (!randomOrderId) {
         throw new Error('No valid random order id found');
       }
@@ -45,11 +43,11 @@ describe('Order Model', () => {
         throw new Error('No valid random product id found');
       }
 
-      // Add the product to the order
+    
       const quantity = 10;
       const result = await store.addProduct(randomOrderId, randomProduct, quantity);
 
-      // Define the expected structure of the returned OrderProduct object
+  
       const expected = {
         id: result.id,
         order_id: randomOrderId,
@@ -57,7 +55,7 @@ describe('Order Model', () => {
         quantity: quantity,
       };
 
-      // Assert that the result matches the expected structure
+      
       expect(result).toEqual(expected);
     } catch (error) {
       fail(`Failed to add product to order: ${error}`);
@@ -76,6 +74,6 @@ describe('Order Model', () => {
   });
 
   afterAll(async () => {
-    // Clean up if needed
+   
   });
 });

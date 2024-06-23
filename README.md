@@ -1,54 +1,86 @@
 # Storefront Backend Project
 
-## Getting Started
+This project is a backend for an online storefront built with Node.js, Express, and PostgreSQL. It provides APIs for user authentication, product management, and order processing.
 
-This repo contains a basic Node and Express app to get you started in constructing an API. To get started, clone this repo and run `yarn` in your terminal at the project root.
+## Prerequisites
 
-## Required Technologies
-Your application must make use of the following libraries:
-- Postgres for the database
-- Node/Express for the application logic
-- dotenv from npm for managing environment variables
-- db-migrate from npm for migrations
-- jsonwebtoken from npm for working with JWTs
-- jasmine from npm for testing
+Before you begin, ensure you have the following installed on your machine:
 
-## Steps to Completion
+- Node.js and npm
+- PostgreSQL
 
-### 1. Plan to Meet Requirements
+## Setup Instructions
 
-In this repo there is a `REQUIREMENTS.md` document which outlines what this API needs to supply for the frontend, as well as the agreed upon data shapes to be passed between front and backend. This is much like a document you might come across in real life when building or extending an API. 
+### Step 1: Clone the Repository
 
-Your first task is to read the requirements and update the document with the following:
-- Determine the RESTful route for each endpoint listed. Add the RESTful route and HTTP verb to the document so that the frontend developer can begin to build their fetch requests.    
-**Example**: A SHOW route: 'blogs/:id' [GET] 
+First, clone the project repository to your local machine:
 
-- Design the Postgres database tables based off the data shape requirements. Add to the requirements document the database tables and columns being sure to mark foreign keys.   
-**Example**: You can format this however you like but these types of information should be provided
-Table: Books (id:varchar, title:varchar, author:varchar, published_year:varchar, publisher_id:string[foreign key to publishers table], pages:number)
+```bash
+git clone https://github.com/luccylu31/storefront-backend.git
+cd storefront-backend
 
-**NOTE** It is important to remember that there might not be a one to one ratio between data shapes and database tables. Data shapes only outline the structure of objects being passed between frontend and API, the database may need multiple tables to store a single shape. 
 
-### 2.  DB Creation and Migrations
+### Step 2: Install Dependencies
+1. Install the required project dependencies using npm:
+npm install
 
-Now that you have the structure of the databse outlined, it is time to create the database and migrations. Add the npm packages dotenv and db-migrate that we used in the course and setup your Postgres database. If you get stuck, you can always revisit the database lesson for a reminder. 
+Step 3: Set Up the Database
+Create PostgreSQL databases:
 
-You must also ensure that any sensitive information is hashed with bcrypt. If any passwords are found in plain text in your application it will not pass.
+Open your PostgreSQL terminal (psql) and run the following commands to create a new user and two databases (one for development and one for testing):
+CREATE USER ahopping_user WITH PASSWORD 'password123';
+CREATE DATABASE shopping;
+GRANT ALL PRIVILEGES ON DATABASE shopping TO ahopping_user;
 
-### 3. Models
+2. Configure environment variables:
 
-Create the models for each database table. The methods in each model should map to the endpoints in `REQUIREMENTS.md`. Remember that these models should all have test suites and mocks.
+Create a .env file in the root directory of the project and add the following environment variables:
+TOKEN_SECRET=your_secret_key
 
-### 4. Express Handlers
+POSTGRES_HOST=127.0.0.1
+POSTGRES_DB=shopping
+POSTGRES_TEST_DB=shopping
+POSTGRES_USER=shopping_user
+POSTGRES_PASSWORD=password123
+ENV=dev
 
-Set up the Express handlers to route incoming requests to the correct model method. Make sure that the endpoints you create match up with the enpoints listed in `REQUIREMENTS.md`. Endpoints must have tests and be CORS enabled. 
+SALT_ROUNDS=10
+BCRYPT_PASSWORD=speak-friend-and-enter
 
-### 5. JWTs
 
-Add JWT functionality as shown in the course. Make sure that JWTs are required for the routes listed in `REQUIUREMENTS.md`.
+3. Migrate the database:
+Run the database migrations to set up the database schema:
+npm run migrate
 
-### 6. QA and `README.md`
+### Step 4: Start the Server
+Start the development server using the following command:
+npm run dev
 
-Before submitting, make sure that your project is complete with a `README.md`. Your `README.md` must include instructions for setting up and running your project including how you setup, run, and connect to your database. 
+The backend server will start on http://localhost:3000.
 
-Before submitting your project, spin it up and test each endpoint. If each one responds with data that matches the data shapes from the `REQUIREMENTS.md`, it is ready for submission!
+### Step 5: Running Tests
+To run the tests, use the following command:
+npm run test
+
+### Ports
+Backend server: The backend server runs on port 3000 by default.
+PostgreSQL database: The PostgreSQL database typically runs on port 5432.
+
+### API Endpoints
+The following are the main API endpoints available in the project:
+
+POST /signup: Create a new user.
+POST /login: Authenticate a user and get a token.
+GET /users: Get a list of users (protected route).
+GET /users/:id: Get user details by ID (protected route).
+POST /products: Create a new product (protected route).
+GET /products: Get a list of products.
+GET /products/:id: Get product details by ID.
+GET /products/category/:category: Get products by category.
+GET /orders: Get a list of orders (protected route).
+POST /orders: Create a new order (protected route).
+POST /orders/:id/products: Add a product to an order (protected route)
+
+### File testcase for model and endpoint
+/src/handlers/tests
+/src/handlers/tests

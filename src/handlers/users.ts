@@ -9,7 +9,6 @@ dotenv.config();
 const store = new UserStore();
 const TOKEN_SECRET = process.env.TOKEN_SECRET as string;
 
-// Helper function to generate JWT token
 const generateToken = (user: User): string => {
   return jwt.sign({ user }, TOKEN_SECRET, { expiresIn: '1h' });
 };

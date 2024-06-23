@@ -16,7 +16,6 @@ let orderId: number;
 
 describe('Order Handler', () => {
   beforeAll(async () => {
-    // Create a test user and generate a JWT token for testing purposes
     const user = await userStore.create({
       first_name: 'Test',
       last_name: 'User',
@@ -27,7 +26,7 @@ describe('Order Handler', () => {
     userId = user.id as number;
     token = jwt.sign({ user_id: userId }, process.env.TOKEN_SECRET as string);
 
-    // Create a test order for the user
+
     const order = await orderStore.create({
       user_id: userId,
       status: 'active',

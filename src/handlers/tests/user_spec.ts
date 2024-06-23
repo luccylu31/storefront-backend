@@ -8,7 +8,6 @@ dotenv.config();
 
 const TOKEN_SECRET = process.env.TOKEN_SECRET as string;
 
-// Mocking JWT token generation for testing
 const generateToken = (user: User): string => {
   return jwt.sign({ user }, TOKEN_SECRET, { expiresIn: '1h' });
 };
@@ -21,10 +20,8 @@ describe('User Handler', () => {
     app = express();
     app.use(express.json());
 
-    // Mock UserStore for testing
     const store = new UserStore();
 
-    // Define routes using mocked handlers
     app.post('/login', async (req, res) => {
       const { username, password } = req.body;
       try {
@@ -120,10 +117,8 @@ describe('User Handler', () => {
       password: 'password',
     };
 
-    // Create user for login test
     await request(app).post('/users').send(user);
 
-    // Login with correct credentials
     const response = await request(app).post('/login').send({
       username: 'johndoe',
       password: 'password123',
@@ -186,6 +181,6 @@ describe('User Handler', () => {
   });
    
   afterAll(() => {
-    // Clean up if needed
+
   });
 });
